@@ -7,8 +7,11 @@
   cfg = config.omakix;
 in {
   config = lib.mkIf cfg.enable {
-    programs.neovim = {
+    programs.nixvim = {
       enable = true;
+
+      colorschemes.tokyo-night.enable = true;
+      plugins.lightline.enable = true;
     };
   };
 }

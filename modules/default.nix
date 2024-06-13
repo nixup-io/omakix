@@ -12,7 +12,7 @@ in {
     ./git.nix
     ./gnome.nix
     ./mise.nix
-    ./neovim.nix
+    ./nixvim.nix
     ./other-programs.nix
     ./readline.nix
     ./shell.nix
