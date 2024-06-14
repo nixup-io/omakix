@@ -38,7 +38,10 @@ in {
           background = "#7aa2f7";
         };
         font = {
-          size = 14;
+          size =
+            if cfg.doubleScale
+            then 7
+            else 14;
           normal = {
             family = "CaskaydiaMono Nerd Font";
             style = "Regular";

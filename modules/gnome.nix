@@ -165,9 +165,7 @@ in {
         };
 
         "org/gnome/mutter" = {
-          # FIXME(m): Make this depend on the doubleScale option
-          # experimental-features = ["scale-monitor-framebuffer"];
-          experimental-features = [];
+          experimental-features = lib.optionals (!cfg.doubleScale) ["scale-monitor-framebuffer"];
           edge-tiling = true;
         };
 
