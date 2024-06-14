@@ -11,26 +11,35 @@
   ];
 
   config = {
+    virtualisation = {
+      memorySize = 2048;
+      graphics = true;
+      qemu.options = [
+        "-cpu host"
+        "-enable-kvm"
+        "-bios ${pkgs.OVMF.fd}/FV/OVMF.fd"
+      ];
+    };
+
     networking.hostName = "omakix-demo";
-
     nixpkgs.config.allowUnfree = true;
-
     i18n.inputMethod.enabled = "ibus";
 
     services.xserver = {
       enable = true;
-      videoDrivers = ["qxl"];
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
+      autoRepeatDelay = 200;
+      autoRepeatInterval = 25;
+      xkb = {
+        layout = "us";
+        variant = "dvorak";
+      };
     };
 
-    services.displayManager.autoLogin = {
-      enable = true;
-      user = "fake";
-    };
+    console.useXkbConfig = true;
 
     programs.dconf.enable = true;
-
     services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
     environment.gnome.excludePackages =
@@ -57,16 +66,15 @@
       })
     ];
 
-    system.stateVersion = "24.05";
-
-    users.users.fake = {
+    security.sudo.wheelNeedsPassword = false;
+    users.users.demo = {
       createHome = true;
       isNormalUser = true;
-      password = "password";
-      group = "users";
+      extraGroups = ["networkmanager" "wheel"];
+      initialPassword = "demo";
     };
 
-    home-manager.users.fake = {
+    home-manager.users.demo = {
       home.stateVersion = "24.05";
       imports = [omakix-module];
       omakix = {
@@ -75,5 +83,7 @@
         font = "CaskaydiaMono Nerd Font";
       };
     };
+
+    system.stateVersion = "24.05";
   };
 }

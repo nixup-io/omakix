@@ -46,29 +46,13 @@
     packages = forAllSystems (system: let
       pkgs = nixpkgsFor.${system};
     in {
-      default = self.packages.${system}.demo;
+      default = self.packages.${system}.gui-vm;
 
-      demo =
+      gui-vm =
         (inputs.nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            (import test/demo.nix {
-              inherit pkgs;
-              home-manager-module = inputs.home-manager.nixosModules.home-manager;
-              omakix-module = self.homeManagerModules.omakix;
-            })
-          ];
-        })
-        .config
-        .system
-        .build
-        .vm;
-
-      console-vm =
-        (inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            (import test/console-vm.nix {
+            (import test/gui-vm.nix {
               inherit pkgs;
               home-manager-module = inputs.home-manager.nixosModules.home-manager;
               omakix-module = self.homeManagerModules.omakix;
@@ -85,7 +69,7 @@
       default = self.apps.${system}.demo;
       demo = {
         type = "app";
-        program = "${self.packages.${system}.demo}/bin/run-omakix-demo-vm";
+        program = "${self.packages.${system}.gui-vm}/bin/run-omakix-demo-vm";
       };
     });
 
