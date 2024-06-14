@@ -38,5 +38,14 @@ in {
       description = "Choose your programming font.";
       example = "CaskaydiaMono Nerd Font";
     };
+
+    doubleScale = lib.mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Enable to assume a 200% display scale for an arguably better look on the Framework 13 laptop display."
+      '';
+      example = true;
+    };
   };
 }
