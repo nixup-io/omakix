@@ -37,6 +37,11 @@
       };
     };
 
+    services.displayManager.autoLogin = {
+      enable = true;
+      user = "demo";
+    };
+
     console.useXkbConfig = true;
 
     programs.dconf.enable = true;
