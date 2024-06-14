@@ -38,7 +38,7 @@ in {
           background = "#7aa2f7";
         };
         font = {
-          size = 7;
+          size = 14;
           normal = {
             family = "CaskaydiaMono Nerd Font";
             style = "Regular";

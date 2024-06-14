@@ -198,10 +198,10 @@ in {
 
       # NOTE(m): Alternatively, follow omakub: don't use fractional scaling.
       # Set scaling to 2 and reduce the font size.
-      "org/gnome/desktop/interface" = {
-        text-scaling-factor = 0.8;
-        cursor-size = 16;
-      };
+      # "org/gnome/desktop/interface" = {
+      #   text-scaling-factor = 0.8;
+      #   cursor-size = 16;
+      # };
 
       # Configure Tactile
       "org/gnome/shell/extensions/tactile" = {
