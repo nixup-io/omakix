@@ -7,10 +7,6 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +15,6 @@
 
   outputs = inputs @ {
     self,
-    nixos-generators,
     nixvim,
     ...
   }: let
@@ -84,26 +79,6 @@
         .system
         .build
         .vm;
-
-      iso = nixos-generators.nixosGenerate {
-        inherit system;
-        specialArgs = {
-          inherit pkgs;
-          diskSize = 20 * 1024;
-        };
-        modules = [
-          # Pin nixpkgs to the flake input, so that the packages installed
-          # come from the flake inputs.nixpkgs.url.
-          ({...}: {nix.registry.nixpkgs.flake = inputs.nixpkgs;})
-          # Apply the rest of the config.
-          (import test/demo.nix {
-            inherit pkgs;
-            home-manager-module = inputs.home-manager.nixosModules.home-manager;
-            omakix-module = self.homeManagerModules.omakix;
-          })
-        ];
-        format = "iso";
-      };
     });
 
     apps = forAllSystems (system: {
