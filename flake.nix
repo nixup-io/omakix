@@ -122,14 +122,5 @@
     });
 
     formatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
-
-    devShells = forAllSystems (system: {
-      default = nixpkgsFor.${system}.mkShell {
-        buildInputs = with nixpkgsFor.${system}; [
-          # FIXME(m): Check if any packages needed otherwise remove this devshell
-          hello
-        ];
-      };
-    });
   };
 }
