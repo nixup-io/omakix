@@ -10,8 +10,8 @@ in {
     programs.nixvim = {
       enable = true;
 
-      colorschemes.tokyo-night.enable = true;
-      plugins.lightline.enable = true;
+      colorschemes.tokyonight.enable = true;
+      plugins.transparent.enable = true;
     };
   };
 }

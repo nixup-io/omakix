@@ -11,7 +11,7 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    inputs.nixvim = {
+    nixvim = {
       url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -42,7 +42,10 @@
       });
   in {
     homeManagerModules.omakix = {...}: {
-      imports = [./modules];
+      imports = [
+        nixvim.homeManagerModules.nixvim
+        ./modules
+      ];
     };
 
     packages = forAllSystems (system: let
@@ -55,6 +58,22 @@
           inherit system;
           modules = [
             (import test/demo.nix {
+              inherit pkgs;
+              home-manager-module = inputs.home-manager.nixosModules.home-manager;
+              omakix-module = self.homeManagerModules.omakix;
+            })
+          ];
+        })
+        .config
+        .system
+        .build
+        .vm;
+
+      console-vm =
+        (inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            (import test/console-vm.nix {
               inherit pkgs;
               home-manager-module = inputs.home-manager.nixosModules.home-manager;
               omakix-module = self.homeManagerModules.omakix;
