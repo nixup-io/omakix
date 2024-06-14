@@ -12,7 +12,7 @@
 
   config = {
     virtualisation = {
-      memorySize = 2048;
+      memorySize = 4096;
       graphics = true;
       qemu.options = [
         "-cpu host"
