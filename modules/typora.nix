@@ -9,7 +9,7 @@ in {
   config = lib.mkIf cfg.enable {
     xdg.configFile."Typora/themes" = {
       recursive = true;
-      source = ./assets/typora-themes;
+      source = ./assets/themes/typora;
     };
   };
 }

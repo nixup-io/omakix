@@ -16,7 +16,6 @@ Inspired by [DHH](https://dhh.dk/)'s [Omakub - "An Omakase Developer Setup for U
 * This project uses [NixVim](https://github.com/nix-community/nixvim) instead of [LazyVim](https://www.lazyvim.org/)
 
 ## TODO
-- Implement the other themes, fonts and theme switching
 - Add missing things like JetBrains fonts, iaFonts (https://github.com/iaolo/iA-Fonts)
 - Add more options, e.g. for disabling Neovim and VS Code
 - Build a NixOS installer ISO that automatically installs NixOS with Omakix enabled

@@ -6,6 +6,55 @@
 }: let
   cfg = config.omakix;
   flameshot-gui = pkgs.writeShellScriptBin "flameshot-gui" "${pkgs.flameshot}/bin/flameshot gui";
+
+  fontNameMappings = {
+    cascadia-mono = "CaskaydiaMono Nerd Font";
+    fira-mono = "FiraMono Nerd Font";
+    jetbrains-mono = "JetBrainsMono NFM";
+    meslo = "MesloLGLDZ Nerd Font";
+  };
+  fontName = fontNameMappings.${cfg.font};
+
+  gnomeThemeMappings = {
+    catppuccin = {
+      background = "catppuccintotoro.png";
+      color = "magenta";
+      color-scheme = "prefer-dark";
+    };
+    everforest = {
+      background = "fog_forest_2.jpg";
+      color = "bark";
+      color-scheme = "prefer-dark";
+    };
+    gruvbox = {
+      background = "ferns-green.jpg";
+      color = "sage";
+      color-scheme = "prefer-dark";
+    };
+    kanagawa = {
+      background = "kanagawa.jpg";
+      color = "purple";
+      color-scheme = "prefer-dark";
+    };
+    nord = {
+      background = "nord_scenary.png";
+      color = "blue";
+      color-scheme = "prefer-dark";
+    };
+    rose-pine = {
+      background = "simple-pastel-by-triarts-from-freepik.jpg";
+      color = "red";
+      color-scheme = "prefer-light";
+    };
+    tokyo-night = {
+      background = "80s-retro-tropical-sunset-by-freepik.jpg";
+      color = "purple";
+      color-scheme = "prefer-dark";
+    };
+  };
+  backgroundFile = gnomeThemeMappings.${cfg.theme}.background;
+  accentColor = gnomeThemeMappings.${cfg.theme}.color;
+  colorScheme = gnomeThemeMappings.${cfg.theme}.color-scheme;
 in {
   config = lib.mkIf cfg.enable {
     dconf.settings = lib.mkMerge [
@@ -128,11 +177,11 @@ in {
         };
 
         "org/gnome/desktop/interface" = {
-          monospace-font-name = "CaskaydiaMono Nerd Font 10";
-          color-scheme = "prefer-dark";
+          monospace-font-name = "${fontName} 10";
+          color-scheme = colorScheme;
           cursor-theme = "Yaru";
-          gtk-theme = "Yaru-purple-dark";
-          icon-theme = "Yaru-purple";
+          gtk-theme = "Yaru-${accentColor}-dark";
+          icon-theme = "Yaru-${accentColor}";
           enable-hot-corners = false;
           show-battery-percentage = true;
         };
@@ -169,25 +218,16 @@ in {
           edge-tiling = true;
         };
 
-        "org/gnome/Console" = {
-          use-system-font = false;
-          custom-font = "Source Code Pro 14";
-        };
-
         "org/gnome/desktop/background" = {
-          picture-uri = "file://${./assets/80s-retro-tropical-sunset-by-freepik.jpg}";
-          picture-uri-dark = "file://${./assets/80s-retro-tropical-sunset-by-freepik.jpg}";
+          picture-uri = "file://${./assets/backgrounds/${backgroundFile}}";
+          picture-uri-dark = "file://${./assets/backgrounds/${backgroundFile}}";
           picture-options = "zoom";
-          primary-color = "#a9b1d6";
-          secondary-color = "#000000000000";
         };
 
         "org/gnome/desktop/screensaver" = {
-          picture-uri = "file://${./assets/80s-retro-tropical-sunset-by-freepik.jpg}";
-          picture-uri-dark = "file://${./assets/80s-retro-tropical-sunset-by-freepik.jpg}";
+          picture-uri = "file://${./assets/backgrounds/${backgroundFile}}";
+          picture-uri-dark = "file://${./assets/backgrounds/${backgroundFile}}";
           picture-options = "zoom";
-          primary-color = "#a9b1d6";
-          secondary-color = "#000000000000";
         };
 
         # Emoji's
@@ -256,7 +296,7 @@ in {
 
         # Configure custom accent colors
         "org/gnome/shell/extensions/custom-accent-colors" = {
-          accent-color = "purple";
+          accent-color = accentColor;
           theme-flatpak = true;
           theme-gtk3 = true;
           theme-shell = true;

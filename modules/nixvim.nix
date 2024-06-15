@@ -5,6 +5,10 @@
   ...
 }: let
   cfg = config.omakix;
+  colorScheme =
+    if cfg.theme == "tokyo-night"
+    then "tokyonight"
+    else cfg.theme;
 in {
   config = lib.mkIf cfg.enable {
     programs.nixvim = {
@@ -13,7 +17,7 @@ in {
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
-      colorschemes.tokyonight.enable = true;
+      colorschemes.${colorScheme}.enable = true;
       globals.mapleader = " ";
       opts = {
         number = true;

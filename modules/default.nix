@@ -28,22 +28,37 @@ in {
     '';
 
     theme = lib.mkOption {
-      type = types.str;
+      type = types.enum [
+        "catppuccin"
+        "everforest"
+        "gruvbox"
+        "kanagawa"
+        "nord"
+        "rose-pine"
+        "tokyo-night"
+      ];
+      default = "tokyo-night";
       description = "Choose your theme.";
-      example = "tokyo-night";
+      example = "catppuccin";
     };
 
     font = lib.mkOption {
-      type = types.str;
+      type = types.enum [
+        "cascadia-mono"
+        "fira-mono"
+        "jetbrains-mono"
+        "meslo"
+      ];
+      default = "cascadia-mono";
       description = "Choose your programming font.";
-      example = "CaskaydiaMono Nerd Font";
+      example = "fira-mono";
     };
 
     doubleScale = lib.mkOption {
       type = types.bool;
       default = false;
       description = ''
-        Enable to assume a 200% display scale for an arguably better look on the Framework 13 laptop display."
+        Enable to assume a 200% display scale for an arguably better look on the Framework 13 laptop display.
       '';
       example = true;
     };

@@ -68,8 +68,8 @@
       imports = [omakix-module];
       omakix = {
         enable = true;
-        theme = "tokyo-night";
-        font = "CaskaydiaMono Nerd Font";
+        theme = "catppuccin";
+        font = "fira-mono";
       };
     };
 

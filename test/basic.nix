@@ -24,8 +24,8 @@ testers.nixosTest {
       imports = [omakix-module];
       omakix = {
         enable = true;
-        theme = "tokyo-night";
-        font = "CaskaydiaMono Nerd Font";
+        theme = "catppuccin";
+        font = "cascadia-mono";
       };
     };
   };
@@ -42,7 +42,10 @@ testers.nixosTest {
     machine.succeed("test -e /home/fake/.config/dconf/user")
     machine.succeed("test -e /home/fake/.XCompose")
     machine.succeed("test -e /home/fake/.config/mise/config.toml")
+    machine.succeed("test -d /home/fake/.config/Typora/themes")
     machine.succeed("test -e /home/fake/.config/ulauncher/settings.json")
+    machine.succeed("test -e /home/fake/.config/autostart/ulauncher.desktop")
     machine.succeed("test -e /home/fake/.config/zellij/config.kdl")
+    machine.succeed("test -d /home/fake/.config/zellij/themes")
   '';
 }
