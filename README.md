@@ -1,6 +1,6 @@
-# An Omakase developer setup with Nix and Home Manager
+# An Omakase developer setup with Nix
 
-Inspired by [DHH](https://dhh.dk/)'s [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/)
+[Nix](https://nixos.org/) port of [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/) by [DHH](https://dhh.dk/).
 
 ## Installation
 
