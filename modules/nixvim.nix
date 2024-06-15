@@ -17,7 +17,20 @@ in {
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
-      colorschemes.${colorScheme}.enable = true;
+      colorschemes =
+        if colorScheme == "everforest"
+        then {
+          base16 = {
+            enable = true;
+            colorscheme = "everforest";
+          };
+        }
+        else {
+          "${colorScheme}" = lib.mkMerge [
+            {enable = true;}
+            (lib.mkIf (cfg.theme == "rose-pine") {settings.variant = "dawn";})
+          ];
+        };
       globals.mapleader = " ";
       opts = {
         number = true;

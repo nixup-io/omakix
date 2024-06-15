@@ -24,7 +24,7 @@ testers.nixosTest {
       imports = [omakix-module];
       omakix = {
         enable = true;
-        theme = "catppuccin";
+        theme = "everforest";
         font = "cascadia-mono";
       };
     };

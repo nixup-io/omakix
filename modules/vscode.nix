@@ -18,17 +18,19 @@
       name = "Catppuccin Macchiato";
       extension = pkgs.vscode-extensions.catppuccin.catppuccin-vsc;
     };
+    # FIXME(m): Nixpkgs does not seem to have `vscode-extensions.sainnhe.everforest`
     everforest = {
       name = "Everforest Dark";
-      extension = pkgs.vscode-extensions.sainnhe.everforest;
+      extension = null;
     };
     gruvbox = {
       name = "Gruvbox Dark Medium";
       extension = pkgs.vscode-extensions.jdinhlife.gruvbox;
     };
+    # FIXME(m): Nixpkgs does not seem to have `vscode-extensions.qufiwefefwoyn.kanagawa`
     kanagawa = {
       name = "Kanagawa";
-      extension = pkgs.vscode-extensions.qufiwefefwoyn.kanagawa;
+      extension = null;
     };
     nord = {
       name = "Nord";
@@ -43,13 +45,12 @@
       extension = pkgs.vscode-extensions.enkia.tokyo-night;
     };
   };
+  themeExtension = vscodeThemeMappings.${cfg.theme}.extension;
 in {
   config = lib.mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      extensions = [
-        vscodeThemeMappings.${cfg.theme}.extension
-      ];
+      extensions = lib.optionals (themeExtension != null) [themeExtension];
       userSettings = {
         "editor.fontFamily" = fontName;
         "editor.tabSize" = 2;
