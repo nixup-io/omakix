@@ -17,7 +17,7 @@ in {
         font.size =
           if cfg.doubleScale
           then 9
-          else 18;
+          else 14;
         env.TERM = "xterm-256color";
         shell.program = "${pkgs.zellij}/bin/zellij";
         window = {
