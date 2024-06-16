@@ -71,7 +71,7 @@ sudo nixos-rebuild --flake . boot
 sudo reboot
 ```
 
-4. Switching themes
+4. Switch themes
 
 Change `omakix.theme` to another supported theme, e.g. `"catppuccin"`.
 
@@ -161,7 +161,7 @@ sudo nixos-rebuild boot
 sudo reboot
 ```
 
-3. Switching themes
+3. Switch themes
 
 Change `omakix.theme` to another supported theme, e.g. `"catppuccin"`.
 
