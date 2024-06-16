@@ -4,9 +4,9 @@
 
 ## Assumptions
 
-* You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome)
-* You're using Home Manager as a NixOS module with or without flakes
-* You have enabled unfree software (`nixpkgs.config.allowUnfree = true;`)
+- You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome)
+- You're using Home Manager as a NixOS module with or without flakes
+- You have enabled unfree software (`nixpkgs.config.allowUnfree = true;`)
 
 ## Installation
 
@@ -73,17 +73,17 @@ sudo reboot
 
 4. Switching themes
 
-Change `omakix.theme` to another supported theme, e.g. "catppuccin".
+Change `omakix.theme` to another supported theme, e.g. `"catppuccin"`.
 
 Switch to the new system configuration:
+
 ```sh
 sudo nixos-rebuild --flake . switch
 ```
 
 You may have to log out and back in again if you notice that the configuration was not applied everywhere.
 
-5. Now go do something productive
-
+5. Go do something productive
 
 ### Without flakes
 
@@ -102,6 +102,7 @@ sudo nix-channel --add https://github.com/michaelshmitty/omakix/archive/master.t
 ```
 
 Update channels
+
 ```sh
 sudo nix-channel --update
 ```
@@ -162,30 +163,32 @@ sudo reboot
 
 3. Switching themes
 
-Change `omakix.theme` to another supported theme, e.g. "catppuccin".
+Change `omakix.theme` to another supported theme, e.g. `"catppuccin"`.
 
 Switch to the new system configuration:
+
 ```sh
 sudo nixos-rebuild switch
 ```
 
 You may have to log out and back in again if you notice that the configuration was not applied everywhere.
 
-4. Now go do something productive
+4. Go do something productive
 
 ## Known limitations
-* Depends on [Unfree Software](https://wiki.nixos.org/wiki/Unfree_Software) (`nixpkgs.config.allowUnfree = true;`) for obvious reasons
-* Gnome does not yet support accent colors (see [Draft merge request: Support accent color](https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/2715)). Ubuntu has its own implementation for Gnome accent colors. This project uses the [Custom Accent Colors Gnome extension](https://extensions.gnome.org/extension/5547/custom-accent-colors/) but the supported colors are not an _exact_ match to Ubuntu's Gnome accent colors as used in Omakub.
-* This project uses [NixVim](https://github.com/nix-community/nixvim) instead of [LazyVim](https://www.lazyvim.org/)
-* Nixpkgs does not seem to have the `sainnhe.everforest` and `qufiwefefwoyn.kanagawa` VS Code extensions. These themes may work if the extension is installed through the marketplace?
-* NixVim does not seem to support `colorschemes.everforest`. Omakix uses `colorschemes.base16.colorscheme = "everforest"` instead. This may not be accurate.
+
+- Depends on [Unfree Software](https://wiki.nixos.org/wiki/Unfree_Software) (`nixpkgs.config.allowUnfree = true;`) for obvious reasons
+- Gnome does not yet support accent colors (see [Draft merge request: Support accent color](https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/2715)). Ubuntu has its own implementation for Gnome accent colors. This project uses the [Custom Accent Colors Gnome extension](https://extensions.gnome.org/extension/5547/custom-accent-colors/) but the supported colors are not an _exact_ match to Ubuntu's Gnome accent colors as used in Omakub.
+- This project uses [NixVim](https://github.com/nix-community/nixvim) instead of [LazyVim](https://www.lazyvim.org/)
+- Nixpkgs does not seem to have the `sainnhe.everforest` and `qufiwefefwoyn.kanagawa` VS Code extensions. These themes may work if the extension is installed through the marketplace?
+- NixVim does not seem to support `colorschemes.everforest`. Omakix uses `colorschemes.base16.colorscheme = "everforest"` instead. This may not be accurate.
 
 ## Acknowledgements
 
-* Thanks to [DHH](https://dhh.dk/) for no doubt spelunking through countless rabbit holes to come up with [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/). And thanks for [Ruby On Rails](https://rubyonrails.org/), David. For 18 years it has given me such a pleasant and efficient workflow in my programming career that I can afford to waste countless hours on stuff like this.
+- Thanks to [DHH](https://dhh.dk/) for spelunking through no doubt countless rabbit holes to come up with [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/). And thanks for [Ruby On Rails](https://rubyonrails.org/), David. For 18 years it has given me such a pleasant and efficient workflow in my programming career that I can afford to waste countless hours on stuff like this.
 
-* Thanks to Snow at [VoidWarranties](https://we.voidwarranties.be/) for diving into Nix and testing this out!
+- Thanks to Snow at [VoidWarranties](https://we.voidwarranties.be/) for diving into Nix and testing this out!
 
-* Thanks to [KDE Plasma Manager](https://github.com/pjones/plasma-manager) for inspiration on how to add modules to [Home Manager](https://github.com/nix-community/home-manager).
+- Thanks to [KDE Plasma Manager](https://github.com/pjones/plasma-manager) for inspiration on how to add modules to [Home Manager](https://github.com/nix-community/home-manager).
 
-* [Nix](https://nixos.org/) is awesome.
+- [Nix](https://nixos.org/) is awesome.
