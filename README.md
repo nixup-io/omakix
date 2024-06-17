@@ -187,8 +187,8 @@ You may have to log out and back in again if you notice that the configuration w
 
 - Thanks to [DHH](https://dhh.dk/) for spelunking through no doubt countless rabbit holes to come up with [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/). And thanks for [Ruby On Rails](https://rubyonrails.org/), David. For 18 years Rails has given my programming career such a pleasant and efficient workflow that I can afford to waste countless hours on stuff like this.
 
-- Thanks to snow at [VoidWarranties](https://we.voidwarranties.be/) for diving into Nix and testing omakix.
+- Thanks to snow at [VoidWarranties](https://we.voidwarranties.be/) for diving into Nix and testing omakix
 
-- Thanks to [KDE Plasma Manager](https://github.com/pjones/plasma-manager) for inspiration on how to add modules to [Home Manager](https://github.com/nix-community/home-manager).
+- Thanks to [KDE Plasma Manager](https://github.com/pjones/plasma-manager) for inspiration on how to add modules to [Home Manager](https://github.com/nix-community/home-manager)
 
-- [Nix](https://nixos.org/) is awesome.
+- [Nix](https://nixos.org/) is awesome
