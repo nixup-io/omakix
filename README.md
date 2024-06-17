@@ -64,7 +64,7 @@ inputs = {
 
 3. Rebuild your system and reboot
 
-Rebooting rather than switching into the new configuration for the first time will make sure all everything is loaded properly.
+Rebooting rather than switching into the new configuration for the first time will make sure everything is loaded properly.
 
 ```sh
 sudo nixos-rebuild --flake . boot
@@ -154,7 +154,7 @@ Add Home Manager and Omakix to your system's `configuration.nix`
 
 2. Rebuild your system and reboot
 
-Rebooting rather than switching into the new configuration for the first time will make sure all everything is loaded properly.
+Rebooting rather than switching into the new configuration for the first time will make sure everything is loaded properly.
 
 ```sh
 sudo nixos-rebuild boot
