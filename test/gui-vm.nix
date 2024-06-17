@@ -11,13 +11,13 @@
   ];
 
   config = {
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
     virtualisation = {
-      memorySize = 4096;
-      graphics = true;
+      memorySize = 8192;
       qemu.options = [
-        "-cpu host"
         "-enable-kvm"
-        "-bios ${pkgs.OVMF.fd}/FV/OVMF.fd"
+        "-vga virtio"
       ];
     };
 
@@ -44,7 +44,6 @@
 
     console.useXkbConfig = true;
 
-    programs.dconf.enable = true;
     services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
     environment.gnome.excludePackages =
