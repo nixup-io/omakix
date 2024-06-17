@@ -1,4 +1,0 @@
-[tools]
-ruby = "3.3"
-node = "lts"
-go = "latest"
