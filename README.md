@@ -22,7 +22,7 @@ inputs = {
     inputs.nixpkgs.follows = "nixpkgs";
   };
   omakix = {
-    url = "github:michaelshmitty/omakix";
+    url = "github:nixup-io/omakix";
     inputs.nixpkgs.follows = "nixpkgs";
     inputs.home-manager.follows = "home-manager";
   };
@@ -98,7 +98,7 @@ sudo nix-channel --add https://github.com/nix-community/home-manager/archive/rel
 Add the Omakix channel
 
 ```sh
-sudo nix-channel --add https://github.com/michaelshmitty/omakix/archive/master.tar.gz omakix
+sudo nix-channel --add https://github.com/nixup-io/omakix/archive/master.tar.gz omakix
 ```
 
 Update channels
