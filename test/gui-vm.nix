@@ -11,7 +11,7 @@
   ];
 
   config = {
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = ["nix-command" "flakes"];
 
     virtualisation = {
       memorySize = 8192;

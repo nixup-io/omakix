@@ -43,6 +43,7 @@ in {
         telescope.enable = true;
         treesitter.enable = true;
         noice.enable = true;
+        transparent.enable = true;
         lsp = {
           enable = true;
           servers = {

@@ -23,7 +23,7 @@ in {
         window = {
           padding.x = 16;
           padding.y = 14;
-          decorations = "none";
+          decorations = "None";
           opacity = 0.97;
         };
         keyboard = {

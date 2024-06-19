@@ -5,14 +5,18 @@
   ...
 }: let
   cfg = config.omakix;
+  ia-fonts = pkgs.callPackage ../packages/ia-fonts.nix {};
 in {
   config = lib.mkIf cfg.enable {
+    fonts.fontconfig.enable = true;
+
     home.packages = with pkgs; [
-      # ia-fonts (Not in nixpkgs, see https://github.com/iaolo/iA-Fonts)
       _1password-gui
       apacheHttpd
       docker-buildx
       docker-compose
+      fastfetch
+      fd
       fira-code
       gh
       gnome.gnome-tweaks
@@ -23,6 +27,7 @@ in {
       gnomeExtensions.tactile
       gnomeExtensions.user-themes
       google-chrome
+      ia-fonts
       lazydocker
       libffi
       libyaml
