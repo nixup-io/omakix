@@ -65,6 +65,8 @@ in {
           close = ["<Super>w"];
           # Make it easy to maximize like you can fill left/right
           maximize = ["<Super>Up"];
+          # Make it easy to resize undecorated windows
+          begin-resize = ["<Super>BackSpace"];
         };
 
         # For keyboards that only have a start/stop button for music, like Logitech MX Keys Mini
@@ -204,18 +206,20 @@ in {
           ];
           disable-user-extensions = false;
           enabled-extensions = [
-            pkgs.gnomeExtensions.tactile.extensionUuid
-            pkgs.gnomeExtensions.just-perfection.extensionUuid
             pkgs.gnomeExtensions.blur-my-shell.extensionUuid
-            pkgs.gnomeExtensions.space-bar.extensionUuid
-            pkgs.gnomeExtensions.user-themes.extensionUuid
             pkgs.gnomeExtensions.custom-accent-colors.extensionUuid
+            pkgs.gnomeExtensions.just-perfection.extensionUuid
+            pkgs.gnomeExtensions.space-bar.extensionUuid
+            pkgs.gnomeExtensions.tactile.extensionUuid
+            pkgs.gnomeExtensions.undecorate.extensionUuid
+            pkgs.gnomeExtensions.user-themes.extensionUuid
           ];
         };
 
         "org/gnome/mutter" = {
           experimental-features = lib.optionals (!cfg.doubleScale) ["scale-monitor-framebuffer"];
           edge-tiling = true;
+          center-new-windows = true;
         };
 
         "org/gnome/desktop/background" = {

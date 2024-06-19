@@ -25,6 +25,7 @@ in {
       gnomeExtensions.just-perfection
       gnomeExtensions.space-bar
       gnomeExtensions.tactile
+      gnomeExtensions.undecorate
       gnomeExtensions.user-themes
       google-chrome
       ia-fonts
