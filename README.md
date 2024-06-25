@@ -16,7 +16,7 @@ When DHH released Omakub, I was intrigued by the idea and because of my desire t
 
 ### Omakase style
 
-1. Download the Omakix installer ISO
+1. Download the latest [Omakix installer ISO](https://github.com/nixup-io/omakix/releases/download/v1.0.0/omakix-v1.0.0-installer.iso)
 
 2. Flash it to a suitable USB drive
 
