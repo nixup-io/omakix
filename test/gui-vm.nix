@@ -11,6 +11,7 @@
   ];
 
   config = {
+    nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
     virtualisation = {
@@ -21,8 +22,17 @@
       ];
     };
 
+    boot = {
+      consoleLogLevel = 0;
+      kernelParams = ["quiet"];
+      initrd.verbose = false;
+      plymouth = {
+        enable = true;
+        theme = "breeze";
+      };
+    };
+
     networking.hostName = "omakix-demo";
-    nixpkgs.config.allowUnfree = true;
     i18n.inputMethod.enabled = "ibus";
 
     services.xserver = {
@@ -31,18 +41,12 @@
       desktopManager.gnome.enable = true;
       autoRepeatDelay = 200;
       autoRepeatInterval = 25;
-      xkb = {
-        layout = "us";
-        variant = "dvorak";
-      };
     };
 
     services.displayManager.autoLogin = {
       enable = true;
       user = "demo";
     };
-
-    console.useXkbConfig = true;
 
     services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
@@ -54,11 +58,20 @@
         epiphany # web browser
       ]);
 
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
     security.sudo.wheelNeedsPassword = false;
     users.users.demo = {
       createHome = true;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "docker"];
       initialPassword = "demo";
     };
 
@@ -67,7 +80,7 @@
       imports = [omakix-module];
       omakix = {
         enable = true;
-        theme = "catppuccin";
+        theme = "tokyo-night";
         font = "fira-mono";
       };
     };
