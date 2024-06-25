@@ -46,7 +46,7 @@
       sudo nix --experimental-features "nix-command flakes" \
       run github:nix-community/disko -- \
       --mode disko \
-      ${./starter/disks-bios.nix}
+      ${./starter/disks.nix}
 
       ${pkgs.gum}/bin/gum spin --title "Generating initial NixOS configuration..." -- \
       sudo nixos-generate-config --root /mnt
@@ -57,6 +57,8 @@
         -e "s/{{OMAKIX_DISKNAME}}/$diskname/g" \
         ${./starter/configuration.nix} \
         | sudo tee /mnt/etc/nixos/configuration.nix
+      sed "s/{{OMAKIX_USERNAME}}/$username/g" ${./starter/home.nix} \
+        | sudo tee /mnt/etc/nixos/home.nix
 
       ${pkgs.gum}/bin/gum spin --title "Installing NixOS. This can take a while..." -- \
       sudo nixos-install --no-root-password --impure --flake /mnt/etc/nixos#omakix
@@ -66,6 +68,8 @@
       || echo "Installation complete. Please reboot manually."
     '';
 in {
+  isoImage.isoName = lib.mkForce "omakix-installer.iso";
+
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
     config.allowUnfree = true;
