@@ -15,6 +15,7 @@
 
   outputs = inputs @ {
     self,
+    nixpkgs,
     nixvim,
     ...
   }: let
@@ -36,6 +37,17 @@
         config.allowUnfree = true;
       });
   in {
+    nixosConfigurations = {
+      installer = nixpkgs.lib.nixosSystem {
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+          ./machines/installer/configuration.nix
+        ];
+        specialArgs = {inherit inputs;};
+      };
+    };
+
     homeManagerModules.omakix = {...}: {
       imports = [
         nixvim.homeManagerModules.nixvim
@@ -47,6 +59,23 @@
       pkgs = nixpkgsFor.${system};
     in {
       default = self.packages.${system}.gui-vm;
+
+      installer-demo = pkgs.writeShellScript "installer-demo" ''
+        set -euo pipefail
+        disk=root.img
+        if [ ! -f "$disk" ]; then
+          echo "Creating harddisk image root.img"
+          ${pkgs.qemu}/bin/qemu-img create -f qcow2 "$disk" 80G
+        fi
+        ${pkgs.qemu}/bin/qemu-system-x86_64 \
+          -cpu host \
+          -enable-kvm \
+          -m 8G \
+          -vga virtio \
+          -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+          -cdrom ${self.packages.${system}.installer-iso}/iso/*.iso \
+          -hda "$disk"
+      '';
 
       gui-vm =
         (inputs.nixpkgs.lib.nixosSystem {
@@ -63,6 +92,8 @@
         .system
         .build
         .vm;
+
+      installer-iso = inputs.self.nixosConfigurations.installer.config.system.build.isoImage;
     });
 
     apps = forAllSystems (system: {
@@ -70,6 +101,10 @@
       demo = {
         type = "app";
         program = "${self.packages.${system}.gui-vm}/bin/run-omakix-demo-vm";
+      };
+      installer-demo = {
+        type = "app";
+        program = "${self.packages.${system}.installer-demo}";
       };
     });
 
