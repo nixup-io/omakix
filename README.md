@@ -24,7 +24,10 @@ When DHH released Omakub, I was intrigued by the idea and because of my desire t
 
 4. Alternatively and arguably the more sensible thing to do with ISO's from random strangers on the Internet: boot it in a virtual machine
 
-**Note:** The installer ISO assumes you're booting with UEFI and will partition the destination disk with GPT and enable full disk encryption (LUKS).
+**Notes**
+
+- The installer ISO assumes you're booting with UEFI and will partition the destination disk with GPT and enable full disk encryption (LUKS).
+- After booting into the installed system for the first time and entering the chosen full disk encryption password, you'll be greeted with the login screen. You log in with the user account name you set during installation and the default password is `changeme`, which tells you exactly what you should do with it.
 
 ### With flakes
 
