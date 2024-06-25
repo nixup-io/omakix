@@ -38,11 +38,11 @@
       });
   in {
     nixosConfigurations = {
-      iso = nixpkgs.lib.nixosSystem {
+      installer = nixpkgs.lib.nixosSystem {
         modules = [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-          ./machines/iso/configuration.nix
+          ./machines/installer/configuration.nix
         ];
         specialArgs = {inherit inputs;};
       };
@@ -73,7 +73,7 @@
           -m 8G \
           -vga virtio \
           -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-          -cdrom ${self.packages.${system}.iso}/iso/*.iso \
+          -cdrom ${self.packages.${system}.installer-iso}/iso/*.iso \
           -hda "$disk"
       '';
 
@@ -93,7 +93,7 @@
         .build
         .vm;
 
-      iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
+      installer-iso = inputs.self.nixosConfigurations.installer.config.system.build.isoImage;
     });
 
     apps = forAllSystems (system: {
