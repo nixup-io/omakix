@@ -7,8 +7,8 @@
   nix.registry.nixpkgs.flake = inputs.nixpkgs; # Make `nix shell` etc use pinned nixpkgs
 
   home = {
-    username = builtins.readFile /tmp/username;
-    homeDirectory = "/home/${builtins.readFile /tmp/username}";
+    username = "{{OMAKIX_USERNAME}}";
+    homeDirectory = "/home/{{OMAKIX_USERNAME}}";
   };
 
   omakix = {
