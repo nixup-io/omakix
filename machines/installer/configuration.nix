@@ -12,9 +12,11 @@
         exit 1
       fi
 
+      # Warn user of imminent doom
       ${pkgs.gum}/bin/gum confirm --default=false \
       "🔥 🔥 🔥 WARNING!!!! This will ERASE ALL DATA on this computer. Are you sure you want to continue?"
 
+      # Prompt the user to select a destination disk from a list of viable candidates
       unmounted_disks=$(lsblk -J | ${pkgs.jq}/bin/jq -r '
         def has_mounted_children(dev): any(dev.children[]?; any(.mountpoints[]?; . != null));
         .blockdevices[]
@@ -28,12 +30,14 @@
       diskname=$(echo "$unmounted_disks" | ${pkgs.gum}/bin/gum choose --header "Choose an installation disk")
       echo -n $diskname > /tmp/diskname
 
+      # Prompt the user to enter a name for the first user account created in the new system
       username=$(${pkgs.gum}/bin/gum input --header "Set a username for your account")
       if [ -z "$username" ]; then
         echo "Username cannot be empty."
         exit 1
       fi
 
+      # Prompt the user to enter a password used for full disk encryption
       secret_key=$(${pkgs.gum}/bin/gum input --password --header "Set a password for full disk encryption")
       if [ -z "$secret_key" ]; then
         echo "Disk encryption password cannot be empty."
@@ -42,30 +46,40 @@
         echo -n $secret_key > /tmp/secret.key
       fi
 
-      ${pkgs.gum}/bin/gum spin --title "Preparing destination disk for installation..." -- \
-      sudo nix --experimental-features "nix-command flakes" \
-      run github:nix-community/disko -- \
-      --mode disko \
-      ${./starter/disks.nix}
+      # Prepare the destination disk with declarative configuration using
+      # Disko (https://github.com/nix-community/disko)
+      ${pkgs.gum}/bin/gum spin \
+        --title "Preparing destination disk for installation..." -- \
+        sudo nix --experimental-features "nix-command flakes" \
+        run github:nix-community/disko -- \
+        --mode disko \
+        ${./starter/disks.nix}
 
-      ${pkgs.gum}/bin/gum spin --title "Generating initial NixOS configuration..." -- \
-      sudo nixos-generate-config --root /mnt
+      # Generate initial NixOS configuration
+      ${pkgs.gum}/bin/gum spin \
+        --title "Generating initial NixOS configuration..." -- \
+        sudo nixos-generate-config --root /mnt
 
+      # Replace some template variables in the configuration with information received from the user through
+      # earlier prompts
       sed "s/{{OMAKIX_USERNAME}}/$username/g" ${./starter/flake.nix} \
-        | sudo tee /mnt/etc/nixos/flake.nix
+        | sudo tee /mnt/etc/nixos/flake.nix > /dev/null
       sed -e "s/{{OMAKIX_USERNAME}}/$username/g" \
         -e "s/{{OMAKIX_DISKNAME}}/$diskname/g" \
         ${./starter/configuration.nix} \
-        | sudo tee /mnt/etc/nixos/configuration.nix
+        | sudo tee /mnt/etc/nixos/configuration.nix > /dev/null
       sed "s/{{OMAKIX_USERNAME}}/$username/g" ${./starter/home.nix} \
-        | sudo tee /mnt/etc/nixos/home.nix
+        | sudo tee /mnt/etc/nixos/home.nix > /dev/null
 
-      ${pkgs.gum}/bin/gum spin --title "Installing NixOS. This can take a while..." -- \
-      sudo nixos-install --no-root-password --impure --flake /mnt/etc/nixos#omakix
+      # Perform the actual NixOS installation
+      ${pkgs.gum}/bin/gum spin \
+        --title "Installing NixOS. This can take a while..." -- \
+        sudo nixos-install --no-root-password --impure --flake /mnt/etc/nixos#omakix
 
+      # Installation finished successfully (hopefully). Ask user for confirmation to reboot
       ${pkgs.gum}/bin/gum confirm "Installation complete. Reboot now?" \
-      && sudo reboot \
-      || echo "Installation complete. Please reboot manually."
+        && sudo reboot \
+        || echo "Installation complete. Please reboot manually."
     '';
 in {
   isoImage.isoName = lib.mkForce "omakix-installer.iso";
