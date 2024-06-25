@@ -8,7 +8,7 @@ When DHH released Omakub, I was intrigued by the idea and because of my desire t
 
 ## Assumptions
 
-- You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome). If you're not running NixOS yet, download the batteries included Omakix installation ISO below.
+- You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome). If you're not running NixOS yet, download the batteries included [Omakix installation ISO](https://github.com/nixup-io/omakix/releases/download/v1.0.0/omakix-v1.0.0-installer.iso)
 - You're using Home Manager as a NixOS module with or without flakes
 - You have enabled unfree software (`nixpkgs.config.allowUnfree = true;`)
 
