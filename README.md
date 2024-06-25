@@ -2,13 +2,29 @@
 
 [Nix](https://nixos.org/) port of [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/) by [DHH](https://dhh.dk/).
 
+When DHH released Omakub, I was intrigued by the idea and because of my desire to level up my Nix skills, I decided to go Omakase on the Omakase and add my own opinionated Nix sauce to the mix.
+
+![Yo dawg I heard you like Omakase](https://i.imgflip.com/8uxrv9.jpg)
+
 ## Assumptions
 
-- You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome)
+- You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome). If you're not running NixOS yet, download the batteries included Omakix installation ISO below.
 - You're using Home Manager as a NixOS module with or without flakes
 - You have enabled unfree software (`nixpkgs.config.allowUnfree = true;`)
 
 ## Installation
+
+### Omakase style
+
+1. Download the Omakix installer ISO
+
+2. Flash it to a suitable USB drive
+
+3. Boot it, install it, enjoy it
+
+4. Alternatively and arguably the more sensible thing to do with ISO's from random strangers on the Internet: boot it in a virtual machine
+
+**Note:** The installer ISO assumes you're booting with UEFI and will partition the destination disk with GPT and enable full disk encryption (LUKS).
 
 ### With flakes
 
@@ -175,6 +191,32 @@ You may have to log out and back in again if you notice that the configuration w
 
 4. Go do something productive
 
+## Things you can do with this flake
+
+This assumes you're running NixOS or another Linux distribution and have the Nix package manager installed.
+
+Run a demo VM with Omakix enabled
+
+```sh
+nix run github:nixup-io/omakix
+```
+
+Generate your very own ISO installation image
+
+```sh
+nix build github:nixup-io/omakix#installer-iso
+# The ISO image will be in result/iso/
+
+# Or after customizing the nix configuration in machines/installer
+nix build .#installer-iso
+```
+
+Run the, arguably limited, test suite
+
+```sh
+nix flake check github:nixup-io/omakix
+```
+
 ## Known limitations
 
 - Depends on [Unfree Software](https://wiki.nixos.org/wiki/Unfree_Software) (`nixpkgs.config.allowUnfree = true;`) for obvious reasons
@@ -183,12 +225,36 @@ You may have to log out and back in again if you notice that the configuration w
 - Nixpkgs does not seem to have the `sainnhe.everforest` and `qufiwefefwoyn.kanagawa` VS Code extensions. These themes may work if the extension is installed through the marketplace?
 - NixVim does not seem to support `colorschemes.everforest`. Omakix uses `colorschemes.base16.colorscheme = "everforest"` instead. This may not be accurate.
 
+## Contribution
+
+"Wow this is absolutely awesome, I cannot hold my enthusiasm to contribute to this."
+
+Well fear not fellow traveler of Cyberspace because you can:
+
+- It's possible this doesn't even work on the first try. If that's the case, [open an issue](https://github.com/nixup-io/omakix/issues/new). Better yet, fix the problem and [open a PR](https://github.com/nixup-io/omakix/pulls).
+
+- If you are a Nix expert and cringe at my absolutely awful, totally not copied from elsewhere Nix code, please [open PRs](https://github.com/nixup-io/omakix/pulls) with suggestions on how to improve things. I'm not necessarily looking for more abstractions, but welcome improvements to the way it's currently done. Most of this was "inspired" by [KDE Plasma Manager](https://github.com/pjones/plasma-manager) and [NixOS Auto Installer](https://github.com/tfc/nixos-auto-installer). See [Nix related issues](https://github.com/nixup-io/omakix/labels/nix).
+
+- I need people to do exhaustive feature comparison between Omakub and this project. If you spot something that isn't exactly like it is set up in Omakub, open an issue for it. Keep in mind that the fact that Omakub is based on Ubuntu, there may be some differences that are harder to overcome. Although that would of course never be attributed to a problem with NixOS. Check out [known things that need porting over](https://github.com/nixup-io/omakix/labels/omakub-port).
+
+- We need an equivalent thing to "I use Arch, by the way" for Nix(OS) to use at cocktail parties. Suggestions welcome!
+
 ## Acknowledgements
 
 - Thanks to [DHH](https://dhh.dk/) for spelunking through no doubt countless rabbit holes to come up with [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/). And thanks for [Ruby On Rails](https://rubyonrails.org/), David. For 18 years Rails has given my programming career such a pleasant and efficient workflow that I can afford to waste countless hours on stuff like this.
 
-- Thanks to snow at [VoidWarranties](https://we.voidwarranties.be/) for diving into Nix and testing omakix
+- Thanks to [Typecraft](https://www.youtube.com/watch?v=g2vcIRavtqY) for his videos which have been instrumental to DHH for making Omakub. I enjoyed the video coverage on Omakub and I like your style, man. I am a fellow [Ruby on Rails](https://rubyonrails.org/) veteran who's looking at 18 years and counting now). Though admittedly I don't use Arch (btw).
 
-- Thanks to [KDE Plasma Manager](https://github.com/pjones/plasma-manager) for inspiration on how to add modules to [Home Manager](https://github.com/nix-community/home-manager)
+- Thanks to snow at [VoidWarranties](https://we.voidwarranties.be/) for diving into Nix and testing Omakix out!
 
-- [Nix](https://nixos.org/) is awesome
+- Thanks to [KDE Plasma Manager](https://github.com/pjones/plasma-manager) for inspiration on how to add modules to [Home Manager](https://github.com/nix-community/home-manager) and thanks to [NixOS Auto Installer](https://github.com/tfc/nixos-auto-installer) for ideas on how to build a quasi unattended NixOS installer.
+
+- [Nix](https://nixos.org/) is awesome.
+
+## Contact
+
+- You can reach me via [good old e-mail](mailto:shmitty@protonmail.com) for a serious and more meaningful conversation if you're into that kind of thing
+
+- You can also [find me on X](https://x.com/michaelshmitty) or in the [Fediverse over at Mastodon](https://social.hacktheplanet.be/@neo)
+
+- Check out my website over at https://michaelsmith.be for more outdated information prior to hiring me

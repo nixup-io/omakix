@@ -1,5 +1,5 @@
 {
-  description = "An Omakase developer setup with Home Manager";
+  description = "An Omakase developer setup with Nix";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
