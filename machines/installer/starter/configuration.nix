@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   config,
@@ -22,6 +23,21 @@
       enable = true;
       theme = "breeze";
     };
+  };
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "--update-input"
+      "home-manager"
+      "--update-input"
+      "omakix"
+      "-L" # print build logs
+    ];
+    dates = "02:00";
   };
 
   services.printing.enable = true;
