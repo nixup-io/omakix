@@ -55,7 +55,7 @@
     packages = forAllSystems (system: let
       pkgs = nixpkgsFor.${system};
     in {
-      default = self.packages.${system}.gui-vm;
+      default = self.packages.${system}.installer-iso;
 
       installer-demo = pkgs.writeShellScript "installer-demo" ''
         set -euo pipefail
