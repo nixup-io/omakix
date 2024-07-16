@@ -8,7 +8,7 @@ When DHH released Omakub, I was intrigued by the idea and because of my desire t
 
 ## Assumptions
 
-- You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome). If you're not running NixOS yet, download the batteries included [Omakix installation ISO](https://github.com/nixup-io/omakix/releases/download/v1.1.0/omakix-v1.1.0-installer.iso)
+- You're running [NixOS 24.05](https://nixos.org/download/) stable with Gnome (as [Omakub](https://omakub.org) is built around Gnome). If you're not running NixOS yet, download the batteries included [Omakix installation ISO](https://github.com/nixup-io/omakix/releases/download/v1.2.0/omakix-v1.2.0-installer.iso)
 - You're using Home Manager as a NixOS module with or without flakes
 - You have enabled unfree software (`nixpkgs.config.allowUnfree = true;`)
 
@@ -16,7 +16,7 @@ When DHH released Omakub, I was intrigued by the idea and because of my desire t
 
 ### Omakase style
 
-1. Download the latest [Omakix installer ISO](https://github.com/nixup-io/omakix/releases/download/v1.1.0/omakix-v1.1.0-installer.iso)
+1. Download the latest [Omakix installer ISO](https://github.com/nixup-io/omakix/releases/download/v1.2.0/omakix-v1.2.0-installer.iso)
 
 2. Flash it to a suitable USB drive
 
@@ -71,6 +71,7 @@ inputs = {
               omakix = {
                 enable = true;
                 theme = "catppuccin"; # Try "catppuccin", "everforest", "gruvbox", "kanagawa", "nord" or "rose-pine" instead
+                browser = "google-chrome"; # Try "firefox" or "chromium" instead
               };
               home.stateVersion = "24.05";
             };
@@ -164,6 +165,7 @@ Add Home Manager and Omakix to your system's `configuration.nix`
       omakix = {
         enable = true;
         theme = "tokyo-night"; # Try "catppuccin", "everforest", "gruvbox", "kanagawa", "nord" or "rose-pine" instead
+        browser = "google-chrome"; # Try "firefox" or "chromium" instead
       };
 
       home.stateVersion = "24.05";
@@ -207,11 +209,11 @@ nix run github:nixup-io/omakix
 Generate your very own ISO installation image
 
 ```sh
-nix build github:nixup-io/omakix#installer-iso
+nix build github:nixup-io/omakix
 # The ISO image will be in result/iso/
 
 # Or after customizing the nix configuration in machines/installer
-nix build .#installer-iso
+nix build
 ```
 
 Run the, arguably limited, test suite
