@@ -62,5 +62,16 @@ in {
       '';
       example = true;
     };
+
+    browser = lib.mkOption {
+      type = types.enum [
+        "chromium"
+        "firefox"
+        "google-chrome"
+      ];
+      default = "google-chrome";
+      description = "Choose your web browser.";
+      example = "firefox";
+    };
   };
 }

@@ -26,6 +26,7 @@ testers.nixosTest {
         enable = true;
         theme = "everforest";
         font = "cascadia-mono";
+        browser = "firefox";
       };
     };
   };

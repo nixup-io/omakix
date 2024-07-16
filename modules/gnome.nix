@@ -172,11 +172,26 @@ in {
         };
 
         # Start a new Chrome window (rather than just switch to the already open one)
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
-          name = "New Chrome";
-          command = "google-chrome-stable";
-          binding = "<Shift><Alt>1";
-        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = lib.mkMerge [
+          {
+            binding = "<Shift><Alt>1";
+          }
+
+          (lib.mkIf (cfg.browser == "chromium") {
+            name = "New Chromium";
+            command = "chromium";
+          })
+
+          (lib.mkIf (cfg.browser == "firefox") {
+            name = "New Firefox";
+            command = "firefox";
+          })
+
+          (lib.mkIf (cfg.browser == "google-chrome") {
+            name = "New Chrome";
+            command = "google-chrome-stable";
+          })
+        ];
 
         "org/gnome/desktop/interface" = {
           monospace-font-name = "${fontName} 10";
@@ -189,21 +204,24 @@ in {
         };
 
         "org/gnome/shell" = {
-          favorite-apps = [
-            "google-chrome.desktop"
-            "Alacritty.desktop"
-            "code.desktop"
-            "com.github.eneshecan.WhatsAppForLinux.desktop"
-            "signal-desktop.desktop"
-            "spotify.desktop"
-            "typora.desktop"
-            "Zoom.desktop"
-            "pinta.desktop"
-            "com.github.xournalpp.xournalpp.desktop"
-            "1password.desktop"
-            "org.gnome.Settings.desktop"
-            "org.gnome.Nautilus.desktop"
-          ];
+          favorite-apps =
+            lib.optional (cfg.browser == "chromium") "chromium-browser.desktop"
+            ++ lib.optional (cfg.browser == "firefox") "firefox.desktop"
+            ++ lib.optional (cfg.browser == "google-chrome") "google-chrome.desktop"
+            ++ [
+              "Alacritty.desktop"
+              "code.desktop"
+              "com.github.eneshecan.WhatsAppForLinux.desktop"
+              "signal-desktop.desktop"
+              "spotify.desktop"
+              "typora.desktop"
+              "Zoom.desktop"
+              "pinta.desktop"
+              "com.github.xournalpp.xournalpp.desktop"
+              "1password.desktop"
+              "org.gnome.Settings.desktop"
+              "org.gnome.Nautilus.desktop"
+            ];
           disable-user-extensions = false;
           enabled-extensions = [
             pkgs.gnomeExtensions.blur-my-shell.extensionUuid

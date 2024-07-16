@@ -82,6 +82,7 @@
         enable = true;
         theme = "tokyo-night";
         font = "fira-mono";
+        browser = "chromium";
       };
     };
 
