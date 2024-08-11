@@ -2,7 +2,7 @@
 
 [Nix](https://nixos.org/) port of [Omakub - "An Omakase Developer Setup for Ubuntu 24.04"](https://omakub.org/) by [DHH](https://dhh.dk/).
 
-When DHH released Omakub, I was intrigued by the idea and because i wanted to level up my Nix skills, I decided to go Omakase on the Omakase and add my own opinionated Nix sauce to the mix.
+When DHH released Omakub, I was intrigued by the idea and because I wanted to level up my Nix skills, I decided to go Omakase on the Omakase and add my own opinionated Nix sauce to the mix.
 
 ![Yo dawg I heard you like Omakase](https://i.imgflip.com/8uxrv9.jpg)
 
